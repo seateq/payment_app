@@ -11,6 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.use('/payments', paymentsRouter);
+app.use('/api/payments', paymentsRouter);
 
 module.exports = app;

@@ -12,15 +12,19 @@ router.post('/', async (req, res) => {
   const isSuccess = geRandomBoolean();
 
   if (isSuccess) {
-    res.send(mockPayment);
+    res.send({
+      success: true,
+      result : mockPayment
+    });
     return;
   }
 
   const isNotEnoughFunds = geRandomBoolean();
 
   if (isNotEnoughFunds) {
-    res.status(400).send({
-      reason: 'Not enough funds'
+    res.send({
+      success: false,
+      error  : 'Not enough funds'
     });
 
     return;
@@ -29,15 +33,17 @@ router.post('/', async (req, res) => {
   const isPaymentGatewayDown = geRandomBoolean();
 
   if (isPaymentGatewayDown) {
-    res.status(500).send({
-      reason: 'Payment gateway is down'
+    res.send({
+      success: false,
+      error  : 'Payment gateway is down'
     });
 
     return;
   }
 
   res.status(500).send({
-    reason: 'Mock error reason'
+    success: false,
+    error  : 'Mock error reason'
   });
 });
 
